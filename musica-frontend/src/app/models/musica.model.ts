@@ -1,7 +1,9 @@
-export class Musica {
-    public id: String
-    public nome: String
-    public artista: String
-    public artistaId: String
-    public checked: Boolean;
+import { Artista } from './artista.model';
+
+export interface Musica {
+    id: String;
+    nome: String;
+    artista: Artista;
+    artistaId: String;
+    checked: Boolean;
 }

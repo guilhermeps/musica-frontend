@@ -1,17 +1,17 @@
 
-<app-topo 
+<app-topo
     (topoMusicSearch)="buscarMusica($event)"
-    (topoPlaylistSearch)="buscarPlaylist($event)" 
+    (topoPlaylistSearch)="buscarPlaylist($event)"
 ></app-topo>
 <div class="col-md-12">
     <div class="row">
-    
+
         <div class="col-md-5">
-            <app-musica [musicas]="musicasLista"></app-musica>
+          <app-musica [musicas]="musicasLista"></app-musica>
         </div>
-        
+
         <div class="col-md-1">
-            <app-controles 
+            <app-controles
                 (controleIncluirMusica)="incluirMusicasPlaylist()"
                 (controleRemoverMusica)="removerMusicasPlaylist()"
             >
@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-md-5">
-                <app-playlist ></app-playlist>
+            <app-playlist [playlist]="playlist" ></app-playlist>
         </div>
     </div>
 </div>

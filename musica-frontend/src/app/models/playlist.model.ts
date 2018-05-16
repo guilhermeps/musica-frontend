@@ -1,27 +1,8 @@
-export class Playlist{
-    
-}
+import { Usuario } from './usuario.model';
+import { PlaylistMusicas } from './playlistMusicas.model';
 
-// {
-//     "id": "string",
-//     "playlistMusicas": [
-//       {
-//         "musica": {
-//           "artista": {
-//             "id": "string",
-//             "nome": "string"
-//           },
-//           "artistaId": "string",
-//           "id": "string",
-//           "nome": "string"
-//         },
-//         "musicaId": "string",
-//         "playlistId": "string"
-//       }
-//     ],
-//     "usuario": {
-//       "id": "string",
-//       "nome": "string",
-//       "playlistId": "string"
-//     }
-//   }
+export interface Playlist {
+  id: String;
+  playlistMusicas: PlaylistMusicas[];
+  usuario: Usuario;
+}

@@ -6,16 +6,13 @@
         <th scope="col"></th>
       </tr>
     </thead>
-    <!-- <tbody>
-      <tr *ngFor="let musica of musicas">
-        <td>{{ musica.nome }}</td>
-        <td>{{ musica.artista.nome }}</td>
+    <tbody>
+      <tr *ngFor="let p of playlist.playlistMusicas">
+        <td>{{ p.musica.nome }}</td>
+        <td>{{ p.musica.artista.nome }}</td>
         <td>
-            <input type="checkbox" (click) = "checkedMusic(musica)"/>
-        </td>
-        <td>
-          {{ musica.checked }}
+            <!-- <input type="checkbox" (click) = "checkedMusic(musica)"/> -->
         </td>
       </tr>
-    </tbody> -->
+    </tbody>
   </table>

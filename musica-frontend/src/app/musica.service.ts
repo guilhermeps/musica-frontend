@@ -40,7 +40,7 @@ export class MusicaService {
     .catch(this.handleError);
   }
 
-  public getPlaylist(usuario): Observable<Playlist>{
+  public getPlaylist(usuario): Observable<Playlist> {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
@@ -52,6 +52,22 @@ export class MusicaService {
     .get(API_URL + '/api/playlists/?user=' + usuario)
     .map(response => {
       const pratos = response.json();
+      return response.json();
+    })
+    .catch(this.handleError);
+  }
+
+  public putPlaylist(playlistId: String, musica: Musica): Observable<any> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+
+    const options = new RequestOptions({ headers: headers });
+    let musicaJson = JSON.stringify(musica);
+
+    return this.http
+    .put(API_URL + '/api/playlists/' + playlistId + '/musicas', musicaJson, { headers: headers })
+    .map(response => {
       return response.json();
     })
     .catch(this.handleError);
