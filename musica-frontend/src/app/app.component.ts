@@ -80,11 +80,11 @@ export class AppComponent {
 
   public incluirMusicasPlaylist(event) {
     let musicasToAdd = this.musicasLista.filter(musica => musica.checked === true && musica.isOnPlaylist === false);
-    let playListMusica = new PlaylistMusicas();
 
     for (let i = 0; i < musicasToAdd.length; i++) {
       this.musicaService.putPlaylist(this.playlist.id, musicasToAdd[i]).subscribe((resp) => {
         if (resp === 200) {
+          let playListMusica = new PlaylistMusicas();
           playListMusica.musicaId = musicasToAdd[i].id;
           playListMusica.playlistId = this.playlist.id;
           playListMusica.musica = musicasToAdd[i];
