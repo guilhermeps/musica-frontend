@@ -1,3 +1,4 @@
+import { MusicaService } from './musica.service';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 describe('AppComponent', () => {
@@ -6,6 +7,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: MusicaService }
+      ]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

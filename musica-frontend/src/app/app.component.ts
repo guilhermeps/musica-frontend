@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import _ from 'lodash';
 
 import { Playlist } from './models/playlist.model';
 import { Musica } from './models/musica.model';
