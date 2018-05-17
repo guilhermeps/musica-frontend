@@ -60,7 +60,7 @@ export class MusicaService {
     headers.append('Content-Type', 'application/json');
     headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-    const options = new RequestOptions({ headers: headers });
+    // const options = new RequestOptions({ headers: headers });
     let musicaJson = JSON.stringify(musica);
 
     return this.http
