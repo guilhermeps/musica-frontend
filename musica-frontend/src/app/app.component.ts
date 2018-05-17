@@ -18,28 +18,32 @@ export class AppComponent {
   public musicasLista: Musica[];
   public playlist: Playlist;
 
-
-  private updateMusicStatus(musicAddedOnPlaylist: PlaylistMusicas) {
+  private updateMusicStatus(music: PlaylistMusicas) {
     if (this.musicasLista.length > 0) {
-      let musica = this.musicasLista.find(m => m.id === musicAddedOnPlaylist.musicaId);
+      let musica = this.musicasLista.find(m => m.id === music.musicaId);
       if (musica !== undefined) {
         let index = this.musicasLista.indexOf(musica);
-        this.musicasLista[index].isOnPlaylist = true;
+        this.musicasLista[index].isOnPlaylist = music.musica.isOnPlaylist;
+        this.musicasLista[index].checked = music.musica.checked;
       }
     }
   }
 
   private configuraListaDeMusicas() {
     // configura todas as músicas como não contidas em nenhuma playlist
-    this.musicasLista.forEach(m => {
-      m.checked = false;
-      m.isOnPlaylist = false;
-    });
+    if (this.musicasLista.length > 0) {
+      this.musicasLista.forEach(m => {
+        m.checked = false;
+        m.isOnPlaylist = false;
+      });
+    }
 
     // verifica se a playlist tem alguma música da lista, caso tenha, atualiza o status da música
-    this.playlist.playlistMusicas.forEach(p => {
-      this.updateMusicStatus(p);
-    });
+    if (this.playlist.playlistMusicas !== undefined) {
+      this.playlist.playlistMusicas.forEach(p => {
+        this.updateMusicStatus(p);
+      });
+    }
   }
 
   constructor(private musicaService: MusicaService) { }
@@ -85,7 +89,8 @@ export class AppComponent {
           playListMusica.playlistId = this.playlist.id;
           playListMusica.musica = musicasToAdd[i];
           this.playlist.playlistMusicas.push(playListMusica);
-
+          playListMusica.musica.isOnPlaylist = true;
+          playListMusica.musica.checked = false;
           this.updateMusicStatus(playListMusica);
         } else {
           console.log('deu ruim');
@@ -95,7 +100,19 @@ export class AppComponent {
   }
 
   public removerMusicasPlaylist(event) {
+    let musicasToRemove = this.playlist.playlistMusicas.filter(m => m.musica.checked === true);
 
+    musicasToRemove.forEach(m => {
+      this.musicaService.deleteMusicFromPlaylist(this.playlist.id, m.musicaId).subscribe((resp) => {
+        if (resp === 200) {
+          let index = this.playlist.playlistMusicas.findIndex(music => music.musicaId === m.musicaId);
+          this.playlist.playlistMusicas.splice(index, 1);
+          m.musica.isOnPlaylist = false;
+          m.musica.checked = false;
+          this.updateMusicStatus(m);
+        }
+      });
+    });
   }
 }
 

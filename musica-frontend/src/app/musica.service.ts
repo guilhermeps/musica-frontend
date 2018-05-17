@@ -72,6 +72,17 @@ export class MusicaService {
     .catch(this.handleError);
   }
 
+  public deleteMusicFromPlaylist(playlistId: String, musicaId: String): Observable<any> {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
 
-
+    return this.http
+    .delete(API_URL + '/api/playlists/' + playlistId + '/musicas/' + musicaId, { headers: headers })
+    .map(response => {
+      return response.status;
+      // return response.json();
+    })
+    .catch(this.handleError);
+  }
 }

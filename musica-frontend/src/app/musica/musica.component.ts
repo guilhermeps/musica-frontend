@@ -19,7 +19,4 @@ export class MusicaComponent implements OnInit {
   checkedMusic(musica: Musica) {
     musica.checked = !musica.checked;
   }
-  // set checkMusic(value){
-  //   console.log(value);
-  // }
 }

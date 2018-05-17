@@ -1,6 +1,7 @@
 
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Playlist } from './../models/playlist.model';
+import { Musica } from '../models/musica.model';
 
 @Component({
   selector: 'app-playlist',
@@ -13,7 +14,9 @@ export class PlaylistComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  checkedMusic(musica: Musica) {
+    musica.checked = !musica.checked;
+  }
 }

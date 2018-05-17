@@ -11,8 +11,7 @@
         <td>{{ musica.nome }}</td>
         <td>{{ musica.artista.nome }}</td>
         <td>
-            <input type="checkbox" (click) = "checkedMusic(musica)" [disabled]="musica.isOnPlaylist == true"  />
-            {{ musica.isOnPlaylist }}
+            <input type="checkbox" (click) = "checkedMusic(musica)" [disabled]="musica.isOnPlaylist == true" />
         </td>
       </tr>
     </tbody>
