@@ -1,3 +1,4 @@
+import { PlaylistMusicas } from './models/playlistMusicas.model';
 
 import { Component } from '@angular/core';
 
@@ -20,7 +21,7 @@ export class AppComponent {
   constructor(private musicaService: MusicaService) { }
 
   ngOnInit() {
-    console.log(this.musicasLista);
+    this.playlist = new Playlist();
   }
 
 
@@ -30,7 +31,6 @@ export class AppComponent {
 
         this.musicaService.getMusicas(filter).subscribe((musicas) => {
             this.musicasLista = musicas;
-            console.log(musicas);
           }
         );
     }
@@ -38,24 +38,29 @@ export class AppComponent {
 
   public buscarPlaylist(event) {
     if (event.keyCode == 13) {
-
         let filter = event.target.value;
 
         this.musicaService.getPlaylist(filter).subscribe((playlist) => {
           this.playlist = playlist;
-          console.log(playlist);
         }
       );
     }
   }
 
   public incluirMusicasPlaylist(event) {
-    let itemsToAdd = this.musicasLista.filter(musica => musica.checked === true);
+    let musicasToAdd = this.musicasLista.filter(musica => musica.checked === true);
+    let playListMusica = new PlaylistMusicas();
 
-    for (let i = 0; i < itemsToAdd.length; i++) {
-      console.log(this.playlist);
-      this.musicaService.putPlaylist(this.playlist.id, itemsToAdd[i]).subscribe((resp) => {
-        console.log(resp);
+    for (let i = 0; i < musicasToAdd.length; i++) {
+      this.musicaService.putPlaylist(this.playlist.id, musicasToAdd[i]).subscribe((resp) => {
+        if (resp === 200) {
+          playListMusica.musicaId = musicasToAdd[i].id;
+          playListMusica.playlistId = this.playlist.id;
+          playListMusica.musica = musicasToAdd[i];
+          this.playlist.playlistMusicas.push(playListMusica);
+        } else {
+          console.log('deu ruim');
+        }
       });
     }
     // console.log(this.musicasLista);

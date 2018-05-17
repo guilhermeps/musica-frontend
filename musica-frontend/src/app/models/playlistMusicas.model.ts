@@ -1,6 +1,6 @@
 import { Musica } from './musica.model';
 
-export interface PlaylistMusicas {
+export class PlaylistMusicas {
   musica: Musica;
   musicaId: String;
   playlistId: String;
