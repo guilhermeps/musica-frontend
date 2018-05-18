@@ -67,6 +67,7 @@ export class AppComponent {
   }
 
   public buscarPlaylist(event) {
+    // ENTER
     if (event.keyCode == 13) {
         let filter = event.target.value;
 
@@ -92,7 +93,7 @@ export class AppComponent {
           playListMusica.musica.checked = false;
           this.updateMusicStatus(playListMusica);
         } else {
-          console.log('deu ruim');
+          console.log('Houve um problema, código de resposta: ' + resp);
         }
       });
     }
@@ -109,6 +110,8 @@ export class AppComponent {
           m.musica.isOnPlaylist = false;
           m.musica.checked = false;
           this.updateMusicStatus(m);
+        } else {
+          console.log('Houve um problema, código de resposta: ' + resp);
         }
       });
     });
